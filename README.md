@@ -1,57 +1,141 @@
-Directory Structure Explanation
-1. /src
-This is the main source directory where all the application code resides. It contains subdirectories for different aspects of the application, promoting separation of concerns.
+Challenge Summary: DIGITAL WALLET
+A Digital Wallet is a system that allows users to securely store and manage payment information (e.g., funds, cards, or other payment credentials) to facilitate seamless transactions. This project requires a robust backend system to handle user authentication, transaction management, wallet services, and API integrations, ensuring a secure and smooth user experience.
 
-/controllers
+Other Considerations and Optional Features
+Security:
 
-This directory contains the controller files that handle incoming requests and define the business logic for the application. Each controller corresponds to a specific feature of the digital wallet.
-authController.js: Manages user authentication, including registration, login, and token generation.
-walletController.js: Handles wallet-related operations such as adding funds, withdrawing funds, and checking balances.
-transactionController.js: Manages transaction-related operations, including creating, processing, and retrieving transactions.
-/models
+Implement encryption for sensitive data (e.g., passwords, payment information).
+Use secure communication protocols (e.g., HTTPS, TLS).
+Enforce strong user authentication mechanisms such as two-factor authentication (2FA).
+Scalability:
 
-This directory contains the Mongoose models that define the structure of the data stored in the MongoDB database. Each model corresponds to a specific entity in the application.
-User .js: Defines the schema for user data, including fields like username, email, password, and wallet balance.
-Wallet.js: (If separate from User) Defines the schema for wallet data, including user references and balance.
-Transaction.js: Defines the schema for transaction data, including user references, transaction amount, type, and timestamp.
-/routes
+Design the system to handle a high volume of concurrent transactions.
+Optimize database queries and implement caching for frequently accessed data.
+Reliability:
 
-This directory contains the route definitions for the application. Each file defines the API endpoints and associates them with the appropriate controller functions.
-authRoutes.js: Defines routes for authentication-related operations (e.g., login, registration).
-walletRoutes.js: Defines routes for wallet-related operations (e.g., add funds, withdraw).
-transactionRoutes.js: Defines routes for transaction-related operations (e.g., create transaction, get transaction history).
-/services
+Ensure high availability with fault-tolerant architecture (e.g., load balancing, backups).
+Implement transaction rollbacks for failed operations.
+User Experience:
 
-This directory contains service files that encapsulate business logic and external integrations. This promotes reusability and separation of concerns.
-emailService.js: Handles email notifications, such as sending transaction confirmations or alerts.
-paymentGatewayService.js: Manages interactions with external payment gateways (e.g., Stripe, PayPal) for processing payments.
-/middlewares
+Provide detailed transaction logs and notifications.
+Offer multi-currency support or localization for global users.
+Optional Features:
 
-This directory contains middleware functions that can be used in the request-response cycle. Middleware functions can perform tasks such as authentication, error handling, and logging.
-authMiddleware.js: Checks if a user is authenticated before allowing access to certain routes.
-errorMiddleware.js: Centralized error handling middleware that catches errors and sends appropriate responses.
-/config
+Integrate rewards or loyalty programs.
+Provide analytics dashboards for users to track spending habits.
+Enable offline access for wallet information (read-only).
+Additional Features
+User Authentication:
 
-This directory contains configuration files for the application, such as database connection settings and server configurations.
-dbConfig.js: Contains the configuration for connecting to the MongoDB database.
-serverConfig.js: Contains configuration settings for the Express server, such as port number and environment variables.
-app.js
+Registration/Login: Support email, phone, or third-party OAuth providers (Google, Facebook).
+Session Management: Implement JWT (JSON Web Token) for secure token-based authentication.
+Password Management: Use bcrypt for hashing passwords before storing them.
+Transaction Management:
 
-This file is responsible for setting up the Express application, including middleware, routes, and error handling. It serves as the main application file that initializes the server.
-server.js
+Support for adding funds, transferring funds, and withdrawing funds.
+Transaction validation to ensure accurate balances.
+Maintain a transaction history for user reference.
+Wallet Services:
 
-This file is the entry point of the application. It typically imports the app.js file and starts the server, listening for incoming requests.
-2. /tests
-This directory contains test files for the application. Each file is responsible for testing a specific feature or module of the application, ensuring that the code behaves as expected.
+Real-time wallet balance updates.
+Support for linking bank accounts or cards.
+Add funds using APIs from payment gateways (e.g., Stripe, Razorpay).
+API Integrations:
 
-authTests.js: Contains unit and integration tests for authentication-related functionalities.
-walletTests.js: Contains tests for wallet-related functionalities.
-transactionTests.js: Contains tests for transaction-related functionalities.
-3. package.json
-This file contains metadata about the project, including the project name, version, description, and dependencies. It is used by npm (Node Package Manager) to manage the project's packages and scripts.
+Payment gateway APIs for processing external payments.
+Notification services (e.g., Twilio for SMS, email notifications).
+Currency conversion APIs for multi-currency transactions.
+Details of Implementation
+1. Backend Framework:
+The backend system is built using:
 
-4. README.md
-This file provides documentation for the project. It typically includes an overview of the project, installation instructions, usage guidelines, and any other relevant information for developers or users.
+Node.js: For non-blocking, event-driven server-side processing.
+Express.js: To handle routing, middleware, and API endpoints efficiently.
+MongoDB: A NoSQL database for storing structured and unstructured data like user details, transactions, and wallet balances.
+2. Key Modules:
 
-Summary
-The directory structure of the /digital-wallet project is designed to facilitate the development of a scalable and maintainable digital wallet application. By organizing the code into distinct directories for controllers, models, routes, services, middlewares, and configuration, the project promotes a clean architecture that is easy to navigate and extend. This structure also supports best practices in software development, such as separation of concerns, modularity, and testability.
+Authentication Module: Handles user sign-up/login, password recovery, and token generation.
+Wallet Module: Manages user balances, fund addition, and payments.
+Transaction Module: Handles CRUD operations for transactions and manages integrity checks.
+Notification Module: Sends alerts or updates for transactions and account activities.
+3. Tools/Technologies:
+
+Mongoose: For Object Data Modeling (ODM) with MongoDB.
+Nodemailer/Twilio: For email/SMS notifications.
+Jest/Mocha: For testing the backend codebase.
+Description of Data
+Users:
+
+Fields: id, name, email, passwordHash, phone, walletId, createdAt, updatedAt.
+Wallet:
+
+Fields: walletId, userId, balance, currency, createdAt, updatedAt.
+Transactions:
+
+Fields: transactionId, walletId, type (credit/debit), amount, status, timestamp.
+APIs:
+
+Fields: apiName, apiKey, usageLimits.
+Writing Clean, Scalable, and Well-Tested Code
+Clean Code:
+
+Use meaningful variable and function names.
+Follow modular coding practices (separate authentication, transactions, and wallet services).
+Adhere to coding standards such as ESLint or Prettier.
+Scalability:
+
+Use a microservices architecture for large-scale deployments.
+Implement horizontal scaling with containerized environments (e.g., Docker and Kubernetes).
+Well-Tested Code:
+
+Write unit tests for core functionalities (e.g., authentication, transaction logic).
+Perform integration tests for API endpoints.
+Automate testing pipelines with CI/CD tools like Jenkins or GitHub Actions.
+Implementation Details
+API Endpoints:
+
+POST /register: For user registration.
+POST /login: For user login and token generation.
+GET /wallet: Fetch wallet details.
+POST /wallet/add-funds: Add funds to the wallet.
+POST /wallet/transfer: Transfer funds between wallets.
+GET /transactions: Fetch transaction history.
+Middleware:
+
+Authentication Middleware: Validates JWT tokens for protected routes.
+Error Handling Middleware: Manages exceptions and sends user-friendly error messages.
+Repo Directory Structure
+bash
+Copy code
+/digital-wallet
+├── /src
+│   ├── /controllers
+│   │   ├── authController.js
+│   │   ├── walletController.js
+│   │   ├── transactionController.js
+│   ├── /models
+│   │   ├── User.js
+│   │   ├── Wallet.js
+│   │   ├── Transaction.js
+│   ├── /routes
+│   │   ├── authRoutes.js
+│   │   ├── walletRoutes.js
+│   │   ├── transactionRoutes.js
+│   ├── /services
+│   │   ├── emailService.js
+│   │   ├── paymentGatewayService.js
+│   ├── /middlewares
+│   │   ├── authMiddleware.js
+│   │   ├── errorMiddleware.js
+│   ├── /config
+│   │   ├── dbConfig.js
+│   │   ├── serverConfig.js
+│   ├── app.js
+│   ├── server.js
+├── /tests
+│   ├── authTests.js
+│   ├── walletTests.js
+│   ├── transactionTests.js
+├── package.json
+├── README.md
+This directory structure ensures separation of concerns and scalability for future feature additions.
