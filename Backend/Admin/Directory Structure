@@ -1,0 +1,14 @@
+digital-wallet/
+├── backend/
+│   ├── index.js
+│   ├── routes/
+│   │   └── userRoutes.js
+│   └── models/
+│       └── userModel.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── Wallet.js
+│   │   ├── App.js
+│   │   └── index.js
+└── package.json
