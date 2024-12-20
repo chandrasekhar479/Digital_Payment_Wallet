@@ -1,4 +1,4 @@
- Developed a robust backend system for a payment platform using Node.js, Express, and MongoDB, ensuring secure and efficient transaction processing.
+Developed a robust backend system for a payment platform using Node.js, Express, and MongoDB, ensuring secure and efficient transaction processing.
 
 Backend System: This refers to the server-side infrastructure responsible for handling requests, processing data, and managing business logic for the payment platform.
 
